@@ -82,6 +82,34 @@
       </tags>
   </entry>
   <entry>
+    <title>反射（Reflection）入门案例</title>
+    <url>/2021/06/13/%E5%8F%8D%E5%B0%84%EF%BC%88Reflection%EF%BC%89%E5%85%A5%E9%97%A8%E6%A1%88%E4%BE%8B/</url>
+    <content><![CDATA[<h1 id="Java反射入门（1）"><a href="#Java反射入门（1）" class="headerlink" title="Java反射入门（1）"></a>Java反射入门（1）</h1><p>​        一直听说反射很重要，但是之前一直没有用到过。最近在开发过程中，发现之前很多大佬用了反射，当时就感觉非常的高大上。于是乎，趁着端午节有时间，赶紧学习一波~</p>
+<p>​        先举个栗子看看反射是怎么用的吧。</p>
+<blockquote>
+<p>需求：根据配置文件指定的信息，创建Hero对象并调用方法playHero.</p>
+</blockquote>
+<p>​        我们先创建两个类和一个配置文件：Hero.java 、 ReflectionDemo.java 、Hero.properties</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hero</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String hero1 = <span class="string">&quot;鲁班&quot;</span>;</span><br><span class="line">  	<span class="comment">//方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">playHero</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;本次使用-&quot;</span> + hero1 + <span class="string">&quot;-英雄&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectionDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">​```properties</span><br><span class="line">classpath = com.yang.reflection.Hero</span><br><span class="line">method = playHero</span><br></pre></td></tr></table></figure>
+
+<p>​        在这之前，我们是这样调用方法的：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  	<span class="comment">//先new一个对象，然后进行调用</span></span><br><span class="line">    Hero hero = <span class="keyword">new</span> Hero();</span><br><span class="line">    hero.playHero();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​        如果用反射的话，是这样的：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException </span>&#123;</span><br><span class="line">    Properties properties = <span class="keyword">new</span> Properties();</span><br><span class="line">    properties.load(<span class="keyword">new</span> FileInputStream(<span class="string">&quot;/Users/qixiangyang/Documents/javaCode/leecodePractice/src/hero.properties&quot;</span>));</span><br><span class="line">    String classPath = properties.get(<span class="string">&quot;classpath&quot;</span>).toString();</span><br><span class="line">    String methodName = properties.get(<span class="string">&quot;method&quot;</span>).toString();</span><br><span class="line">    System.out.println(<span class="string">&quot;classPath = &quot;</span> + classPath);</span><br><span class="line">    System.out.println(<span class="string">&quot;methodName = &quot;</span> + methodName);</span><br><span class="line"></span><br><span class="line">    Class cls = Class.forName(classPath);</span><br><span class="line">    Object o = cls.newInstance();</span><br><span class="line">    Method method = cls.getMethod(methodName);</span><br><span class="line">    method.invoke(o);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>先记住这种用法，具体的原理后续讲解！</p>
+]]></content>
+      <categories>
+        <category>JAVA</category>
+      </categories>
+      <tags>
+        <tag>反射</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java之BigDecimal详解</title>
     <url>/2020/12/27/BigDecimal%E8%AF%A6%E8%A7%A3/</url>
     <content><![CDATA[<h1 id="Java之BigDecimal详解"><a href="#Java之BigDecimal详解" class="headerlink" title="Java之BigDecimal详解"></a>Java之BigDecimal详解</h1><p>Java在java.math包中提供的API类BigDecimal，用来对超过16位有效位的数进行精确的运算。双精度浮点型变量double可以处理16位有效数，但在实际应用中，可能需要对更大或者更小的数进行运算和处理。一般情况下，对于那些不需要准确计算精度的数字，我们可以直接使用Float和Double处理，但是Double.valueOf(String) 和Float.valueOf(String)会丢失精度。所以开发中，如果我们需要精确计算的结果，则必须使用BigDecimal类来操作。BigDecimal所创建的是对象，故我们不能使用传统的+、-、*、/等算术运算符直接对其对象进行数学运算，而必须调用其相对应的方法。方法中的参数也必须是BigDecimal的对象。</p>
