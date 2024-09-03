@@ -1,6 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>什么是方法</title>
+    <url>/2023/05/03/%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p>方法(method) 也称为函数(function) : 是java程序中的独立的功能单位.</p>
+<p>方法必须隶属于类, 且不可以嵌套定义声明.</p>
+<h2 id="方法声明"><a href="#方法声明" class="headerlink" title="方法声明"></a>方法声明</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">修饰符 返回值类型 方法名(数据类型1 形参1, 数据类型2 形参2, 数据类型3 形参3,....) &#123;</span><br><span class="line">    语句块; // 处理和加工数据</span><br><span class="line">    <span class="built_in">return</span> 返回值; // 经过处理的结果数据, 返回给调用者</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>返回值类型 : </p>
+<p>方法的成果数据的类型</p>
+</li>
+<li><p>方法名 : 标识符</p>
+</li>
+<li><p>形式参数 : </p>
+<p>方法的功能性的完成需要的数据, 没有数据万万不行, 但是数据值是多少不影响功能性.</p>
+</li>
+<li><p>return : </p>
+<p>返回结果数据给调用者.</p>
+</li>
+</ul>
+<h2 id="形式组合"><a href="#形式组合" class="headerlink" title="形式组合"></a>形式组合</h2><ul>
+<li><p>有参有返回 : 有输入有输出</p>
+</li>
+<li><p>有参无返回 : 有输入无输出</p>
+</li>
+<li><p>无参有返回 : 无输入有输出</p>
+</li>
+<li><p>无参无返回 : 无输入无输出</p>
+</li>
+</ul>
+<p><strong>方法没有返回值时, 且在最后的return可以省略</strong></p>
+<h2 id="方法调用流程"><a href="#方法调用流程" class="headerlink" title="方法调用流程"></a>方法调用流程</h2><ol>
+<li><p>在调用者方法中 通过实参 给 形参传递数据, 传递的方式就是赋值 形参=实参</p>
+</li>
+<li><p>在调用者方法中作现场保护, 目的就是方法结束后知道该怎么继续.</p>
+</li>
+<li><p>现场保护完成后, 调用者方法挂起, 进入暂停状态</p>
+</li>
+<li><p>被调用方法处于激活运行状态, 把通过形参接收到的数据在方法中进一步处理(执行里面的语句)</p>
+</li>
+<li><p>把最终成果数据通过 return, 返回, 把成果数据保存在一个临时变量空间中, 被调用方法彻底结束.</p>
+</li>
+<li><p>把返回值的临时空间交给调用者方法, 在调用者方法中只有一次机会接收这个临时空间中的返回值</p>
+</li>
+<li><p>接收到返回值以后,作现场恢复, 继续执行后面的代码.</p>
+</li>
+</ol>
+<h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MethodTest</span> </span>&#123;</span><br><span class="line">  <span class="comment">//修饰符 返回值类型 方法名(参数列表) &#123;方法体&#125;;</span></span><br><span class="line">  <span class="comment">//求2个整数的和</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;add(int a, int b)...&quot;</span>);</span><br><span class="line">    <span class="keyword">short</span> c = (<span class="keyword">short</span>)(a + b);</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;main begin&quot;</span>);</span><br><span class="line">    <span class="keyword">short</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">byte</span> b = <span class="number">20</span>;</span><br><span class="line">    <span class="keyword">int</span> c = add(a, b);</span><br><span class="line">    System.out.println(c);</span><br><span class="line">    test(); <span class="comment">// 纯调用.</span></span><br><span class="line">    System.out.println(<span class="string">&quot;main end&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;MethodTest.test()...&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">&quot;test222&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main1</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;main begin&quot;</span>);</span><br><span class="line">    <span class="comment">// 调用方法 : 方法名(实参列表);</span></span><br><span class="line">    <span class="keyword">int</span> x = add(<span class="number">20</span>, <span class="number">80</span>); <span class="comment">// 20和80就是实参列表.</span></span><br><span class="line">    <span class="comment">//System.out.println(c);</span></span><br><span class="line">    System.out.println(x);</span><br><span class="line">    System.out.println(add(<span class="number">30</span>, <span class="number">200</span>)); <span class="comment">// 嵌套调用, 先执行里面的. 返回值的一次性使用</span></span><br><span class="line">    <span class="comment">// 如果方法没有返回值, 禁止用变量接收.</span></span><br><span class="line">    test(); <span class="comment">// ()是方法的标志</span></span><br><span class="line">    <span class="comment">//int n = test();</span></span><br><span class="line">    <span class="comment">// 如果方法没有返回值, 禁止打印它的调用</span></span><br><span class="line">    <span class="comment">//System.out.println(test());</span></span><br><span class="line">    test();</span><br><span class="line">    System.out.println(<span class="string">&quot;main end&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="方法调用图"><a href="#方法调用图" class="headerlink" title="方法调用图"></a>方法调用图</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MethodTest2</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;test(int a)... : &quot;</span> + a);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    test(a); <span class="comment">// 连环调用</span></span><br><span class="line">    System.out.println(<span class="string">&quot;add(int, int)...&quot;</span>); <span class="comment">// 3</span></span><br><span class="line">    <span class="keyword">int</span> c = a + b;</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;main begin&quot;</span>); </span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">40</span>;</span><br><span class="line">    <span class="keyword">int</span> c = add(a, b);</span><br><span class="line">    System.out.println(c);</span><br><span class="line">    System.out.println(<span class="string">&quot;main end&quot;</span>); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://techyang-blog-pic.oss-cn-beijing.aliyuncs.com/img/image-20230503151609535.png" alt="image-20230503151609535"></p>
+<h2 id="方法重载"><a href="#方法重载" class="headerlink" title="方法重载"></a>方法重载</h2><ul>
+<li><strong>方法重载</strong>(overload)：指在同一个类中，允许存在一个以上的同名方法，只要它们的参数列表不同即可，与修饰符和返回值类型无关。</li>
+<li>参数列表：数据类型个数不同，数据类型不同（按理来说数据类型顺序不同也可以，但是很少见，也不推荐，逻辑上容易有歧义）。</li>
+<li>重载方法调用：JVM通过方法的参数列表，调用匹配的方法。<ul>
+<li>先找个数、类型最匹配的</li>
+<li>再找个数和类型可以兼容的，如果同时多个方法可以兼容将会报错</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">判 断：</span><br><span class="line">与<span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">char</span> b,<span class="keyword">double</span> c)</span></span>&#123;&#125;构成重载的有：</span><br><span class="line">a)  <span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">char</span> y,<span class="keyword">double</span> z)</span></span>&#123;&#125;   f</span><br><span class="line">b)  <span class="function"><span class="keyword">int</span> <span class="title">show</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">double</span> c,<span class="keyword">char</span> b)</span></span>&#123;&#125;   t</span><br><span class="line">c)  <span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">double</span> c,<span class="keyword">char</span> b)</span></span>&#123;&#125;  t</span><br><span class="line">d)  <span class="function"><span class="keyword">boolean</span> <span class="title">show</span><span class="params">(<span class="keyword">int</span> c,<span class="keyword">char</span> b)</span></span>&#123;&#125;  t</span><br><span class="line">e)  <span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">(<span class="keyword">double</span> c)</span></span>&#123;&#125;  t</span><br><span class="line">f)  <span class="function"><span class="keyword">double</span> <span class="title">show</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">char</span> y,<span class="keyword">double</span> z)</span></span>&#123;&#125;  f</span><br><span class="line">g)  <span class="function"><span class="keyword">void</span> <span class="title">shows</span><span class="params">(<span class="keyword">double</span> c)</span></span>&#123;&#125;  f</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="方法的递归调用"><a href="#方法的递归调用" class="headerlink" title="方法的递归调用"></a>方法的递归调用</h2><p><strong>递归调用</strong>：方法自己调用自己的现象就称为递归。</p>
+<p><strong>递归的分类:</strong></p>
+<ul>
+<li>递归分为两种，直接递归和间接递归。</li>
+<li>直接递归称为方法自身调用自己。</li>
+<li>间接递归可以A方法调用B方法，B方法调用C方法，C方法调用A方法。</li>
+</ul>
+<p><strong>注意事项</strong>：</p>
+<ul>
+<li>递归一定要有条件限定，保证递归能够停止下来，否则会发生栈内存溢出。</li>
+<li>在递归中虽然有限定条件，但是递归深度不能太深，否则效率低下，或者也会发生栈内存溢出。<ul>
+<li>能够使用循环代替的，尽量使用循环代替递归</li>
+</ul>
+</li>
+</ul>
+<p><strong>什么时候用递归</strong>：把复杂问题分解成一个小问题和相同类型的子问题(子问题就用递归)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 有限的递归, 必须有参数, 因为要通过参数的控制来达到让它趋于结束 (像迭代)</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> n</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//return test(n); // 递归调用 : 方法调用自身. 无限递归, 死归</span></span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> n * test(n - <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    System.out.println(test(<span class="number">5</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://techyang-blog-pic.oss-cn-beijing.aliyuncs.com/img/image-20230503153012137.png" alt="image-20230503153012137"></p>
+]]></content>
+      <categories>
+        <category>JAVA</category>
+      </categories>
+      <tags>
+        <tag>方法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaSE数组</title>
     <url>/2023/05/01/JavaSE%E6%95%B0%E7%BB%84/</url>
     <content><![CDATA[<h1 id="1-数组的概念"><a href="#1-数组的概念" class="headerlink" title="1. 数组的概念"></a>1. 数组的概念</h1><p>一组<code>相同类型</code>的数据的组合, 实现对这些数据的统一管理和处理. 数组必用循环!</p>
@@ -155,100 +249,6 @@
       </categories>
       <tags>
         <tag>面向对象</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>什么是方法</title>
-    <url>/2023/05/03/%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p>方法(method) 也称为函数(function) : 是java程序中的独立的功能单位.</p>
-<p>方法必须隶属于类, 且不可以嵌套定义声明.</p>
-<h2 id="方法声明"><a href="#方法声明" class="headerlink" title="方法声明"></a>方法声明</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">修饰符 返回值类型 方法名(数据类型1 形参1, 数据类型2 形参2, 数据类型3 形参3,....) &#123;</span><br><span class="line">    语句块; // 处理和加工数据</span><br><span class="line">    <span class="built_in">return</span> 返回值; // 经过处理的结果数据, 返回给调用者</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>返回值类型 : </p>
-<p>方法的成果数据的类型</p>
-</li>
-<li><p>方法名 : 标识符</p>
-</li>
-<li><p>形式参数 : </p>
-<p>方法的功能性的完成需要的数据, 没有数据万万不行, 但是数据值是多少不影响功能性.</p>
-</li>
-<li><p>return : </p>
-<p>返回结果数据给调用者.</p>
-</li>
-</ul>
-<h2 id="形式组合"><a href="#形式组合" class="headerlink" title="形式组合"></a>形式组合</h2><ul>
-<li><p>有参有返回 : 有输入有输出</p>
-</li>
-<li><p>有参无返回 : 有输入无输出</p>
-</li>
-<li><p>无参有返回 : 无输入有输出</p>
-</li>
-<li><p>无参无返回 : 无输入无输出</p>
-</li>
-</ul>
-<p><strong>方法没有返回值时, 且在最后的return可以省略</strong></p>
-<h2 id="方法调用流程"><a href="#方法调用流程" class="headerlink" title="方法调用流程"></a>方法调用流程</h2><ol>
-<li><p>在调用者方法中 通过实参 给 形参传递数据, 传递的方式就是赋值 形参=实参</p>
-</li>
-<li><p>在调用者方法中作现场保护, 目的就是方法结束后知道该怎么继续.</p>
-</li>
-<li><p>现场保护完成后, 调用者方法挂起, 进入暂停状态</p>
-</li>
-<li><p>被调用方法处于激活运行状态, 把通过形参接收到的数据在方法中进一步处理(执行里面的语句)</p>
-</li>
-<li><p>把最终成果数据通过 return, 返回, 把成果数据保存在一个临时变量空间中, 被调用方法彻底结束.</p>
-</li>
-<li><p>把返回值的临时空间交给调用者方法, 在调用者方法中只有一次机会接收这个临时空间中的返回值</p>
-</li>
-<li><p>接收到返回值以后,作现场恢复, 继续执行后面的代码.</p>
-</li>
-</ol>
-<h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MethodTest</span> </span>&#123;</span><br><span class="line">  <span class="comment">//修饰符 返回值类型 方法名(参数列表) &#123;方法体&#125;;</span></span><br><span class="line">  <span class="comment">//求2个整数的和</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;add(int a, int b)...&quot;</span>);</span><br><span class="line">    <span class="keyword">short</span> c = (<span class="keyword">short</span>)(a + b);</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;main begin&quot;</span>);</span><br><span class="line">    <span class="keyword">short</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">byte</span> b = <span class="number">20</span>;</span><br><span class="line">    <span class="keyword">int</span> c = add(a, b);</span><br><span class="line">    System.out.println(c);</span><br><span class="line">    test(); <span class="comment">// 纯调用.</span></span><br><span class="line">    System.out.println(<span class="string">&quot;main end&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;MethodTest.test()...&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">&quot;test222&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main1</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;main begin&quot;</span>);</span><br><span class="line">    <span class="comment">// 调用方法 : 方法名(实参列表);</span></span><br><span class="line">    <span class="keyword">int</span> x = add(<span class="number">20</span>, <span class="number">80</span>); <span class="comment">// 20和80就是实参列表.</span></span><br><span class="line">    <span class="comment">//System.out.println(c);</span></span><br><span class="line">    System.out.println(x);</span><br><span class="line">    System.out.println(add(<span class="number">30</span>, <span class="number">200</span>)); <span class="comment">// 嵌套调用, 先执行里面的. 返回值的一次性使用</span></span><br><span class="line">    <span class="comment">// 如果方法没有返回值, 禁止用变量接收.</span></span><br><span class="line">    test(); <span class="comment">// ()是方法的标志</span></span><br><span class="line">    <span class="comment">//int n = test();</span></span><br><span class="line">    <span class="comment">// 如果方法没有返回值, 禁止打印它的调用</span></span><br><span class="line">    <span class="comment">//System.out.println(test());</span></span><br><span class="line">    test();</span><br><span class="line">    System.out.println(<span class="string">&quot;main end&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="方法调用图"><a href="#方法调用图" class="headerlink" title="方法调用图"></a>方法调用图</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MethodTest2</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;test(int a)... : &quot;</span> + a);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    test(a); <span class="comment">// 连环调用</span></span><br><span class="line">    System.out.println(<span class="string">&quot;add(int, int)...&quot;</span>); <span class="comment">// 3</span></span><br><span class="line">    <span class="keyword">int</span> c = a + b;</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;main begin&quot;</span>); </span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">40</span>;</span><br><span class="line">    <span class="keyword">int</span> c = add(a, b);</span><br><span class="line">    System.out.println(c);</span><br><span class="line">    System.out.println(<span class="string">&quot;main end&quot;</span>); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://techyang-blog-pic.oss-cn-beijing.aliyuncs.com/img/image-20230503151609535.png" alt="image-20230503151609535"></p>
-<h2 id="方法重载"><a href="#方法重载" class="headerlink" title="方法重载"></a>方法重载</h2><ul>
-<li><strong>方法重载</strong>(overload)：指在同一个类中，允许存在一个以上的同名方法，只要它们的参数列表不同即可，与修饰符和返回值类型无关。</li>
-<li>参数列表：数据类型个数不同，数据类型不同（按理来说数据类型顺序不同也可以，但是很少见，也不推荐，逻辑上容易有歧义）。</li>
-<li>重载方法调用：JVM通过方法的参数列表，调用匹配的方法。<ul>
-<li>先找个数、类型最匹配的</li>
-<li>再找个数和类型可以兼容的，如果同时多个方法可以兼容将会报错</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">判 断：</span><br><span class="line">与<span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">char</span> b,<span class="keyword">double</span> c)</span></span>&#123;&#125;构成重载的有：</span><br><span class="line">a)  <span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">char</span> y,<span class="keyword">double</span> z)</span></span>&#123;&#125;   f</span><br><span class="line">b)  <span class="function"><span class="keyword">int</span> <span class="title">show</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">double</span> c,<span class="keyword">char</span> b)</span></span>&#123;&#125;   t</span><br><span class="line">c)  <span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">double</span> c,<span class="keyword">char</span> b)</span></span>&#123;&#125;  t</span><br><span class="line">d)  <span class="function"><span class="keyword">boolean</span> <span class="title">show</span><span class="params">(<span class="keyword">int</span> c,<span class="keyword">char</span> b)</span></span>&#123;&#125;  t</span><br><span class="line">e)  <span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">(<span class="keyword">double</span> c)</span></span>&#123;&#125;  t</span><br><span class="line">f)  <span class="function"><span class="keyword">double</span> <span class="title">show</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">char</span> y,<span class="keyword">double</span> z)</span></span>&#123;&#125;  f</span><br><span class="line">g)  <span class="function"><span class="keyword">void</span> <span class="title">shows</span><span class="params">(<span class="keyword">double</span> c)</span></span>&#123;&#125;  f</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="方法的递归调用"><a href="#方法的递归调用" class="headerlink" title="方法的递归调用"></a>方法的递归调用</h2><p><strong>递归调用</strong>：方法自己调用自己的现象就称为递归。</p>
-<p><strong>递归的分类:</strong></p>
-<ul>
-<li>递归分为两种，直接递归和间接递归。</li>
-<li>直接递归称为方法自身调用自己。</li>
-<li>间接递归可以A方法调用B方法，B方法调用C方法，C方法调用A方法。</li>
-</ul>
-<p><strong>注意事项</strong>：</p>
-<ul>
-<li>递归一定要有条件限定，保证递归能够停止下来，否则会发生栈内存溢出。</li>
-<li>在递归中虽然有限定条件，但是递归深度不能太深，否则效率低下，或者也会发生栈内存溢出。<ul>
-<li>能够使用循环代替的，尽量使用循环代替递归</li>
-</ul>
-</li>
-</ul>
-<p><strong>什么时候用递归</strong>：把复杂问题分解成一个小问题和相同类型的子问题(子问题就用递归)</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 有限的递归, 必须有参数, 因为要通过参数的控制来达到让它趋于结束 (像迭代)</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> n</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//return test(n); // 递归调用 : 方法调用自身. 无限递归, 死归</span></span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> n * test(n - <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    System.out.println(test(<span class="number">5</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://techyang-blog-pic.oss-cn-beijing.aliyuncs.com/img/image-20230503153012137.png" alt="image-20230503153012137"></p>
-]]></content>
-      <categories>
-        <category>JAVA</category>
-      </categories>
-      <tags>
-        <tag>方法</tag>
       </tags>
   </entry>
   <entry>
