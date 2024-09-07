@@ -95,6 +95,59 @@
       </tags>
   </entry>
   <entry>
+    <title>面向对象基础（上）</title>
+    <url>/2023/05/03/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%8A%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="1-面向对象编程"><a href="#1-面向对象编程" class="headerlink" title="1. 面向对象编程"></a>1. 面向对象编程</h1><p>面向对象思想研究的三条主线：</p>
+<ol>
+<li><p>类和类成员的研究</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1. 属性：描述事物的特征</span><br><span class="line">2. 方法：描述事物的行为</span><br><span class="line">3. 构造器：又称构造方法</span><br><span class="line">4. 语句块：待补充</span><br><span class="line">5. 内部类：待补充</span><br></pre></td></tr></table></figure></li>
+<li><p>三大特征</p>
+<p>封装:</p>
+<ol>
+<li>成员私有化, 使用private修饰成员, 再提供get/set方法间接访问成员, 最终的目的是保护数据.</li>
+<li>功能性封装</li>
+</ol>
+<p>继承：待补充</p>
+<p>多态：待补充</p>
+</li>
+<li><p>其它关键字</p>
+<p>this,super,package,import,static,final,abstract,extends,interface,implements,native……</p>
+</li>
+</ol>
+<h2 id="1-1-类和对象"><a href="#1-1-类和对象" class="headerlink" title="1.1 类和对象"></a>1.1 类和对象</h2><p>类：某种事物的描述</p>
+<p>对象：类的实体</p>
+<p><strong>类是模板，对象是实体。</strong></p>
+<blockquote>
+<p>成员变量和局部变量</p>
+</blockquote>
+<p>成员变量：</p>
+<ul>
+<li>成员变量定义在类中，在整个类中都可以被访问</li>
+<li>成员变量分为类成员变量和实例成员变量，实例变量存在于对象所在的堆内存中</li>
+<li>成员变量都有默认初始化值，均为零</li>
+<li>成员变量的权限修饰符可以根据需要选择任意一个 – public：修饰成员的特点是公共的；private：修饰的成员的特点是私有的，只能在本类中使用</li>
+</ul>
+<p>局部变量：</p>
+<ul>
+<li>局部变量只定义在局部范围内，如：方法内，代码块内等</li>
+<li>局部变量存在于栈内存中</li>
+<li>作用的范围结束，变量空间会自动释放</li>
+<li>局部变量没有默认初始化值，每次必须显式初始化</li>
+<li>局部变量声明时不指定权限修饰符</li>
+</ul>
+<blockquote>
+<p>成员意味着什么？</p>
+</blockquote>
+<p>成员意味着可以相互访问。</p>
+]]></content>
+      <categories>
+        <category>JAVA</category>
+      </categories>
+      <tags>
+        <tag>面向对象</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaSE数组</title>
     <url>/2023/05/01/JavaSE%E6%95%B0%E7%BB%84/</url>
     <content><![CDATA[<h1 id="1-数组的概念"><a href="#1-数组的概念" class="headerlink" title="1. 数组的概念"></a>1. 数组的概念</h1><p>一组<code>相同类型</code>的数据的组合, 实现对这些数据的统一管理和处理. 数组必用循环!</p>
@@ -196,59 +249,6 @@
       </categories>
       <tags>
         <tag>数组</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>面向对象基础（上）</title>
-    <url>/2023/05/03/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%8A%EF%BC%89/</url>
-    <content><![CDATA[<h1 id="1-面向对象编程"><a href="#1-面向对象编程" class="headerlink" title="1. 面向对象编程"></a>1. 面向对象编程</h1><p>面向对象思想研究的三条主线：</p>
-<ol>
-<li><p>类和类成员的研究</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1. 属性：描述事物的特征</span><br><span class="line">2. 方法：描述事物的行为</span><br><span class="line">3. 构造器：又称构造方法</span><br><span class="line">4. 语句块：待补充</span><br><span class="line">5. 内部类：待补充</span><br></pre></td></tr></table></figure></li>
-<li><p>三大特征</p>
-<p>封装:</p>
-<ol>
-<li>成员私有化, 使用private修饰成员, 再提供get/set方法间接访问成员, 最终的目的是保护数据.</li>
-<li>功能性封装</li>
-</ol>
-<p>继承：待补充</p>
-<p>多态：待补充</p>
-</li>
-<li><p>其它关键字</p>
-<p>this,super,package,import,static,final,abstract,extends,interface,implements,native……</p>
-</li>
-</ol>
-<h2 id="1-1-类和对象"><a href="#1-1-类和对象" class="headerlink" title="1.1 类和对象"></a>1.1 类和对象</h2><p>类：某种事物的描述</p>
-<p>对象：类的实体</p>
-<p><strong>类是模板，对象是实体。</strong></p>
-<blockquote>
-<p>成员变量和局部变量</p>
-</blockquote>
-<p>成员变量：</p>
-<ul>
-<li>成员变量定义在类中，在整个类中都可以被访问</li>
-<li>成员变量分为类成员变量和实例成员变量，实例变量存在于对象所在的堆内存中</li>
-<li>成员变量都有默认初始化值，均为零</li>
-<li>成员变量的权限修饰符可以根据需要选择任意一个 – public：修饰成员的特点是公共的；private：修饰的成员的特点是私有的，只能在本类中使用</li>
-</ul>
-<p>局部变量：</p>
-<ul>
-<li>局部变量只定义在局部范围内，如：方法内，代码块内等</li>
-<li>局部变量存在于栈内存中</li>
-<li>作用的范围结束，变量空间会自动释放</li>
-<li>局部变量没有默认初始化值，每次必须显式初始化</li>
-<li>局部变量声明时不指定权限修饰符</li>
-</ul>
-<blockquote>
-<p>成员意味着什么？</p>
-</blockquote>
-<p>成员意味着可以相互访问。</p>
-]]></content>
-      <categories>
-        <category>JAVA</category>
-      </categories>
-      <tags>
-        <tag>面向对象</tag>
       </tags>
   </entry>
   <entry>
