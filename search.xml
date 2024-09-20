@@ -36,10 +36,22 @@
 <p><img src="https://techyang-blog-pic.oss-cn-beijing.aliyuncs.com/img/image-20240908091509403.png" alt="image-20240908091509403"></p>
 ]]></content>
       <categories>
-        <category>JAVA</category>
+        <category>组件</category>
       </categories>
       <tags>
-        <tag>Nifi 安装部署</tag>
+        <tag>Nifi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL练习题(持续更新中...)</title>
+    <url>/techyang/2024/09/20/SQL%E7%BB%83%E4%B9%A0%E9%A2%98(%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E4%B8%AD...)/</url>
+    <content><![CDATA[<p> </p>
+]]></content>
+      <categories>
+        <category>hive</category>
+      </categories>
+      <tags>
+        <tag>SQL</tag>
       </tags>
   </entry>
   <entry>
@@ -124,7 +136,7 @@
 
 
 
-<h3 id="集群规划"><a href="#集群规划" class="headerlink" title="集群规划"></a>集群规划</h3><table>
+<h2 id="一-集群规划"><a href="#一-集群规划" class="headerlink" title="一.集群规划"></a>一.集群规划</h2><table>
 <thead>
 <tr>
 <th>bigdata101</th>
@@ -172,12 +184,33 @@
 <tr>
 <td></td>
 <td></td>
+<td>KAFKA</td>
+<td>KAFKA</td>
+<td>KAFKA</td>
+</tr>
+<tr>
+<td>FLUME</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MYSQL</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MAXWELL</td>
+<td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 </tbody></table>
-<h3 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h3><ul>
+<h2 id="二-组件安装"><a href="#二-组件安装" class="headerlink" title="二.组件安装"></a>二.组件安装</h2><h3 id="2-1-安装JDK"><a href="#2-1-安装JDK" class="headerlink" title="2.1 安装JDK"></a>2.1 安装JDK</h3><ul>
 <li><p>解压缩</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -zxvf /opt/software/jdk-8u212-linux-x64.tar.gz -C /opt/module/</span><br></pre></td></tr></table></figure></li>
 <li><p>配置环境变量</p>
@@ -194,7 +227,7 @@
 <li><p>分发</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xsync /opt/module/jdk1.8.0_212</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="安装ZK"><a href="#安装ZK" class="headerlink" title="安装ZK"></a>安装ZK</h3><ul>
+<h3 id="2-2-安装ZK"><a href="#2-2-安装ZK" class="headerlink" title="2.2 安装ZK"></a>2.2 安装ZK</h3><ul>
 <li><p>在bigdata3服务器解压缩</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -zxvf /opt/software/apache-zookeeper-3.7.1-bin.tar.gz -C /opt/module</span><br></pre></td></tr></table></figure></li>
 <li><p>重命名</p>
@@ -223,7 +256,7 @@
 <li><p>zk群起群停脚本</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span></span><br><span class="line"><span class="string">&quot;start&quot;</span>)&#123;</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> bigdata103 bigdata104 bigdata105</span><br><span class="line">	<span class="keyword">do</span></span><br><span class="line">        <span class="built_in">echo</span> ---------- zookeeper <span class="variable">$i</span> 启动 ------------</span><br><span class="line">		ssh <span class="variable">$i</span> <span class="string">&quot;/opt/module/zookeeper-3.7.1/bin/zkServer.sh start&quot;</span></span><br><span class="line">	<span class="keyword">done</span></span><br><span class="line">&#125;;;</span><br><span class="line"><span class="string">&quot;stop&quot;</span>)&#123;</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> bigdata103 bigdata104 bigdata105</span><br><span class="line">	<span class="keyword">do</span></span><br><span class="line">        <span class="built_in">echo</span> ---------- zookeeper <span class="variable">$i</span> 停止 ------------    </span><br><span class="line">		ssh <span class="variable">$i</span> <span class="string">&quot;/opt/module/zookeeper-3.7.1/bin/zkServer.sh stop&quot;</span></span><br><span class="line">	<span class="keyword">done</span></span><br><span class="line">&#125;;;</span><br><span class="line"><span class="string">&quot;status&quot;</span>)&#123;</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> bigdata103 bigdata104 bigdata105</span><br><span class="line">	<span class="keyword">do</span></span><br><span class="line">        <span class="built_in">echo</span> ---------- zookeeper <span class="variable">$i</span> 状态 ------------    </span><br><span class="line">		ssh <span class="variable">$i</span> <span class="string">&quot;/opt/module/zookeeper-3.7.1/bin/zkServer.sh status&quot;</span></span><br><span class="line">	<span class="keyword">done</span></span><br><span class="line">&#125;;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="安装Hadoop"><a href="#安装Hadoop" class="headerlink" title="安装Hadoop"></a>安装Hadoop</h3><ul>
+<h3 id="2-3-安装Hadoop"><a href="#2-3-安装Hadoop" class="headerlink" title="2.3 安装Hadoop"></a>2.3 安装Hadoop</h3><ul>
 <li><p>在bigdata101解压缩</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -zxvf /opt/software/hadoop-3.3.4.tar.gz -C /opt/module</span><br></pre></td></tr></table></figure></li>
 <li><p>配置Hadoop环境变量</p>
@@ -280,7 +313,7 @@
 <li><p>编写hadoop启动脚本</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#! /bin/bash</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$#</span> -eq 0 ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;没有参数,请输入&quot;</span></span><br><span class="line">        <span class="built_in">exit</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span></span><br><span class="line"><span class="string">&quot;start&quot;</span>)</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;===========启动hdfs============&quot;</span></span><br><span class="line">         ssh bigdata101 <span class="string">&quot;/opt/module/hadoop-3.3.4/sbin/start-dfs.sh&quot;</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;===========启动yarn============&quot;</span></span><br><span class="line">         ssh bigdata101 <span class="string">&quot;/opt/module/hadoop-3.3.4/sbin/start-yarn.sh&quot;</span></span><br><span class="line">        ;;</span><br><span class="line"><span class="string">&quot;stop&quot;</span>)</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;===========关闭yarn============&quot;</span></span><br><span class="line">        ssh bigdata101 <span class="string">&quot;/opt/module/hadoop-3.3.4/sbin/stop-yarn.sh&quot;</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;===========关闭hdfs============&quot;</span></span><br><span class="line">        ssh bigdata101 <span class="string">&quot;/opt/module/hadoop-3.3.4/sbin/stop-dfs.sh&quot;</span></span><br><span class="line">        ;;</span><br><span class="line">*)</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;参数错误&quot;</span></span><br><span class="line">        ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="部署Kafka"><a href="#部署Kafka" class="headerlink" title="部署Kafka"></a>部署Kafka</h3><ul>
+<h3 id="2-4-部署Kafka"><a href="#2-4-部署Kafka" class="headerlink" title="2.4 部署Kafka"></a>2.4 部署Kafka</h3><ul>
 <li><p>在bigdata103解压缩</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -zxvf /opt/software/kafka_2.12-3.3.1.tgz -C /opt/module/</span><br></pre></td></tr></table></figure></li>
 <li><p>修改配置文件 cofig/server.properties</p>
@@ -299,7 +332,7 @@
 <li><p>验证</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">kf.sh start</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="部署Flume"><a href="#部署Flume" class="headerlink" title="部署Flume"></a>部署Flume</h3><ul>
+<h3 id="2-5-部署Flume"><a href="#2-5-部署Flume" class="headerlink" title="2.5 部署Flume"></a>2.5 部署Flume</h3><ul>
 <li><p>在bigdata101解压缩</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -zxvf /opt/software/apache-flume-1.10.1-bin.tar.gz -C /opt/module/</span><br></pre></td></tr></table></figure></li>
 <li><p>重命名</p>
@@ -313,7 +346,8 @@
 <li><p>设置环境变量</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#FLUME_HOME</span></span><br><span class="line"><span class="built_in">export</span> FLUME_HOME=/opt/module/flume-1.10.1</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$FLUME_HOME</span>/bin</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="采集配置验证"><a href="#采集配置验证" class="headerlink" title="采集配置验证"></a>采集配置验证</h3><ul>
+<p>  <strong>验证 本地文件 到 Kafka</strong></p>
+<ul>
 <li><p>创建文件夹</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 用于存放自定义的配置</span></span><br><span class="line">mkdir -p /opt/module/flume-1.10.1/job</span><br><span class="line"><span class="meta">#</span><span class="bash"> 用于存放追加的元数据文件</span></span><br><span class="line">mkdir -p /opt/module/flume-1.10.1/position</span><br></pre></td></tr></table></figure></li>
 <li><p>在job路径下配置文件系统到kafka的配置文件(日志选择tailDirSource)</p>
@@ -337,7 +371,15 @@
 <li><p>封装flume启动脚本</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">case $1 in</span><br><span class="line">&quot;start&quot;)&#123;</span><br><span class="line">    echo &quot; --------启动 bigdata101 采集flume-------&quot;</span><br><span class="line">    ssh bigdata101 &quot;nohup /opt/module/flume-1.10.1/bin/flume-ng agent -n a1 -c /opt/module/flume-1.10.1/conf/ -f /opt/module/flume-1.10.1/job/log_to_kafka.conf &gt;/dev/null 2&gt;&amp;1 &amp;&quot;</span><br><span class="line">&#125;;;</span><br><span class="line">&quot;stop&quot;)&#123;</span><br><span class="line">    echo &quot; --------停止 bigdata101 采集flume-------&quot;</span><br><span class="line">    ssh bigdata101 &quot;ps -ef | grep log_to_kafka | grep -v grep |awk  &#x27;&#123;print \$2&#125;&#x27; | xargs -n1 kill -9 &quot;</span><br><span class="line">&#125;;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h3><ul>
+<p><strong>将flume同步到bigdata103</strong></p>
+<ul>
+<li><p>在job目录下配置kafka到hdfs的配置文件(KafkaSource –&gt; fileChanel –&gt; hdfsSink)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#定义组件</span><br><span class="line">a1.sources=r1</span><br><span class="line">a1.channels=c1</span><br><span class="line">a1.sinks=k1</span><br><span class="line"> </span><br><span class="line">#配置source1</span><br><span class="line">a1.sources.r1.type = org.apache.flume.source.kafka.KafkaSource</span><br><span class="line">#一批次5000个event</span><br><span class="line">a1.sources.r1.batchSize = 5000</span><br><span class="line">#时间超过2s</span><br><span class="line">a1.sources.r1.batchDurationMillis = 2000</span><br><span class="line">#链接kafka的机器</span><br><span class="line">a1.sources.r1.kafka.bootstrap.servers = bigdata103:9092,bigdata104:9092,bigdata105:9092</span><br><span class="line">#主题</span><br><span class="line">a1.sources.r1.kafka.topics=topic_log</span><br><span class="line">#拦截器</span><br><span class="line">a1.sources.r1.interceptors = i1</span><br><span class="line">#自己写的拦截器，功能主要是包装header的时间戳字段</span><br><span class="line">a1.sources.r1.interceptors.i1.type = com.techyang.gmall.flume.interceptor.TimestampInterceptor$Builder</span><br><span class="line"> </span><br><span class="line">#配置channel</span><br><span class="line">a1.channels.c1.type = file</span><br><span class="line">a1.channels.c1.dataDirs = /opt/module/flume-1.10.1/data/behavior</span><br><span class="line">a1.channels.c1.checkpointDir = /opt/module/flume-1.10.1/checkpoint/behavior</span><br><span class="line">a1.channels.c1.maxFileSize = 2146435071</span><br><span class="line">a1.channels.c1.capacity = 1000000</span><br><span class="line">#如果sink端处理的慢，source端处理的快，source传到channel后，channel已满，先等6s再看是否要回滚，如果有空间了不会回滚</span><br><span class="line">a1.channels.c1.keep-alive = 6</span><br><span class="line"> </span><br><span class="line">#配置sink</span><br><span class="line">a1.sinks.k1.type = hdfs</span><br><span class="line"># 通过环境变量定位到配置文件</span><br><span class="line">a1.sinks.k1.hdfs.path = /origin_data/gmall/log/topic_log/%Y-%m-%d</span><br><span class="line">a1.sinks.k1.hdfs.filePrefix = log</span><br><span class="line">a1.sinks.k1.hdfs.round = false</span><br><span class="line"> </span><br><span class="line"> #10s回滚一个新文件</span><br><span class="line">a1.sinks.k1.hdfs.rollInterval = 10</span><br><span class="line">#文件大小超过128M回滚一个新文件</span><br><span class="line">a1.sinks.k1.hdfs.rollSize = 134217728</span><br><span class="line">a1.sinks.k1.hdfs.rollCount = 0</span><br><span class="line">#控制输出文件类型</span><br><span class="line">a1.sinks.k1.hdfs.fileType = CompressedStream</span><br><span class="line">a1.sinks.k1.hdfs.codeC = gzip</span><br><span class="line"> </span><br><span class="line">#组装 </span><br><span class="line">a1.sources.r1.channels = c1</span><br><span class="line">a1.sinks.k1.channel = c1</span><br></pre></td></tr></table></figure></li>
+<li><p>自定义拦截器</p>
+<p>….</p>
+</li>
+</ul>
+<h3 id="2-6-安装MySQL"><a href="#2-6-安装MySQL" class="headerlink" title="2.6 安装MySQL"></a>2.6 安装MySQL</h3><ul>
 <li><p>卸载MySQL依赖</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo yum remove mysql-libs</span><br></pre></td></tr></table></figure></li>
 <li><p>安装依赖</p>
@@ -346,6 +388,39 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">su root</span><br><span class="line"></span><br><span class="line">sh install_mysql.sh</span><br></pre></td></tr></table></figure></li>
 <li><p>切回普通用户</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure></li>
+<li><p>开启MySQL的binlog</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/my.cfg</span><br></pre></td></tr></table></figure>
+
+<p>在[mysqld]下增加以下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#数据库id</span><br><span class="line">server-id = 1</span><br><span class="line">#启动binlog，该参数的值会作为binlog的文件名</span><br><span class="line">log-bin=mysql-bin</span><br><span class="line">#binlog类型，maxwell要求为row类型</span><br><span class="line">binlog_format=row</span><br><span class="line">#启用binlog的数据库，需根据实际情况作出修改</span><br><span class="line">binlog-do-db=gmall</span><br></pre></td></tr></table></figure>
+
+<p>保存并重启mysql</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo systemctl restart mysqld</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果重启失败,检查 /etc/my.cfg文件是否存在问题!</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="2-7-安装MaxWell"><a href="#2-7-安装MaxWell" class="headerlink" title="2.7 安装MaxWell"></a>2.7 安装MaxWell</h3><ul>
+<li><p>在bigdata101解压缩</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -zxvf /opt/software/maxwell-1.29.2.tar.gz -C /opt/module</span><br></pre></td></tr></table></figure></li>
+<li><p>创建maxwell需要的数据库和用户</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 创建数据库</span></span><br><span class="line"><span class="keyword">CREATE</span> DATABASE maxwell;</span><br><span class="line"><span class="comment">-- 创建maxwell用户并赋予权限  用户名 maxwell 密码 maxwell</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">&#x27;maxwell&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;maxwell&#x27;</span>;</span><br><span class="line"><span class="comment">-- 给maxwell用户赋予maxwell开头的数据库所有的权限</span></span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">ON</span> maxwell.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;maxwell&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line"><span class="comment">-- 给maxwell用户赋予 所有的数据库有查询和复制的权限</span></span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">SELECT</span>, REPLICATION CLIENT, REPLICATION SLAVE <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;maxwell&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br></pre></td></tr></table></figure></li>
+<li><p>配置maxwell</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp config.properties.example config.properties</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment">#Maxwell数据发送目的地，可选配置有stdout|file|kafka|kinesis|pubsub|sqs|rabbitmq|redis</span></span><br><span class="line"><span class="attr">producer</span>=<span class="string">kafka</span></span><br><span class="line"><span class="comment"># 目标Kafka集群地址</span></span><br><span class="line"><span class="meta">kafka.bootstrap.servers</span>=<span class="string">bigdata103:9092,bigdata104:9092,bigdata105:9092</span></span><br><span class="line"><span class="comment">#目标Kafka topic，可静态配置，例如:maxwell，也可动态配置，例如：%&#123;database&#125;_%&#123;table&#125;</span></span><br><span class="line"><span class="attr">kafka_topic</span>=<span class="string">topic_db</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"># MySQL相关配置</span></span><br><span class="line"><span class="attr">host</span>=<span class="string">bigdata101</span></span><br><span class="line"><span class="attr">user</span>=<span class="string">maxwell</span></span><br><span class="line"><span class="attr">password</span>=<span class="string">maxwell</span></span><br><span class="line"><span class="attr">jdbc_options</span>=<span class="string">useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;allowPublicKeyRetrieval=true</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment"># 过滤gmall中的z_log表数据，该表是日志数据的备份，无须采集</span></span><br><span class="line"><span class="attr">filter</span>=<span class="string">exclude:gmall.z_log</span></span><br><span class="line"><span class="comment"># 指定数据按照主键分组进入Kafka不同分区，避免数据倾斜</span></span><br><span class="line"><span class="attr">producer_partition_by</span>=<span class="string">primary_key</span></span><br></pre></td></tr></table></figure></li>
+<li><p>封装maxwell启停脚本</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"> </span><br><span class="line">MAXWELL_HOME=/opt/module/maxwell-1.29.2</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="title">status_maxwell</span></span>()&#123;</span><br><span class="line">    result=`ps -ef | grep com.zendesk.maxwell.Maxwell | grep -v grep | wc -l`</span><br><span class="line">    <span class="built_in">return</span> <span class="variable">$result</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="title">start_maxwell</span></span>()&#123;</span><br><span class="line">    status_maxwell</span><br><span class="line">    <span class="keyword">if</span> [[ $? -lt 1 ]]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;启动Maxwell&quot;</span></span><br><span class="line">        <span class="variable">$MAXWELL_HOME</span>/bin/maxwell --config <span class="variable">$MAXWELL_HOME</span>/config.properties --daemon</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;Maxwell正在运行&quot;</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="title">stop_maxwell</span></span>()&#123;</span><br><span class="line">    status_maxwell</span><br><span class="line">    <span class="keyword">if</span> [[ $? -gt 0 ]]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;停止Maxwell&quot;</span></span><br><span class="line">        ps -ef | grep com.zendesk.maxwell.Maxwell | grep -v grep | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | xargs <span class="built_in">kill</span> -9</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;Maxwell未在运行&quot;</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span></span><br><span class="line">    start )</span><br><span class="line">        start_maxwell</span><br><span class="line">    ;;</span><br><span class="line">    stop )</span><br><span class="line">        stop_maxwell</span><br><span class="line">    ;;</span><br><span class="line">    restart )</span><br><span class="line">       stop_maxwell</span><br><span class="line">       start_maxwell</span><br><span class="line">    ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure></li>
+<li><p>启动</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mxw.sh start</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="2-8-安装DataX"><a href="#2-8-安装DataX" class="headerlink" title="2.8 安装DataX"></a>2.8 安装DataX</h3><ul>
+<li><p>在bigdata101解压缩</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -zxvf /opt/software/datax.tar.gz -C /opt/module/</span><br></pre></td></tr></table></figure></li>
+<li><p>验证是否安装成功</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">python ./bin/datax.py ./job/job.json</span><br></pre></td></tr></table></figure></li>
 </ul>
 ]]></content>
       <categories>
